@@ -8,16 +8,17 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog'
 })
 export class ConfirmDeleteComponent implements OnInit {
   title: String = 'Delete record';
-  message: string = 'Are you sure';
+  message: string = 'Are you sure?';
   confirmButtonText = 'Yes';
   cancelButtonText = 'Cancel';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<ConfirmDeleteComponent>
   ) { 
-    if(data) {
+    if(this.data) {
       this.message = data.message || this.message;
+      this.title = data.title || this.title;
     }
 
     if(data.buttonText) {
@@ -32,7 +33,7 @@ export class ConfirmDeleteComponent implements OnInit {
   }
 
   onConfirmClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
 }

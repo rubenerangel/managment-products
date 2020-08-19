@@ -1,14 +1,13 @@
 <section fxLayout="row wrap" fxLayout="center center">
-  <mat-card>
-    <mat-card-title>
-      {{title}}
-    </mat-card-title>
+  <mat-card fxFlex="300px">
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-divider mx-1></mat-divider>
     <mat-card-content>
-      {{message}}
+      <h6 class="text-center">{{message}}</h6>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
-	    <button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+    <mat-card-actions align="center">
+      <button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+      <button mat-raised-button color="warn" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
     </mat-card-actions>
   </mat-card>
 

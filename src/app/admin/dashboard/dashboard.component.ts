@@ -14,8 +14,6 @@ import { ConfirmDeleteComponent } from '../dialogs/confirm-delete/confirm-delete
 import { AddProductsComponent } from '../dialogs/add-products/add-products.component';
 import {
   FormGroup,
-  FormControl,
-  Validators
 } from '@angular/forms';
 
 @Component({
@@ -33,7 +31,7 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private productDataAPI: ProductApiService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -52,10 +50,8 @@ export class DashboardComponent implements OnInit{
 
     /* Closed Modal And Save or Update */
     openAddProducts.afterClosed().subscribe(result => {
-      this.debugResponses(result);
       if (result.id === null) {
         this.productDataAPI.addProduct(result).then(resp => {
-          this.debugResponses(resp)
         })
         .catch(error => {
           this.debugResponses(error.message);
@@ -97,8 +93,22 @@ export class DashboardComponent implements OnInit{
   }
 
   deleteProduct(idProduct: string): void {
-    this.productDataAPI.deleteProduct(idProduct);
-    // let confirmDelete = this.dialog.open(ConfirmDeleteComponent);
+    const confirmDelete = this.dialog.open(ConfirmDeleteComponent,{
+      data: {
+        title: 'Delete Record',
+        buttonText: {
+          ok: 'Save',
+          cancel: 'No'
+        }
+      }
+    });
+
+    confirmDelete.afterClosed().subscribe( (confirmed: boolean) => {
+      this.debugResponses(confirmed);
+      if (confirmed) {
+        this.productDataAPI.deleteProduct(idProduct);
+      }
+    });
   }
 
   debugResponses(someOne: any) {
