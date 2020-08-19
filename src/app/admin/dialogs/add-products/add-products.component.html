@@ -1,0 +1,29 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>{{data.title}}</mat-card-title>
+    <form [formGroup]="productForm" autocomplete="off" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <div class="col-9">
+            <input type="hidden" id="id" [(ngModel)]="data.product.id" formControlName="id" *ngIf="data.product.id != null">
+     
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput type="text" placeholder="Name"  id="name" [(ngModel)]="data.product.name" formControlName="name">
+            <mat-hint align="end" *ngIf="productForm.get('name').errors">Min. 3 Characters</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-9">
+          <mat-form-field>
+            <mat-label>Price</mat-label>
+            <input type="number" name="price" id="price"  matInput [(ngModel)]="data.product.price" formControlName="price">
+            <mat-hint align="end" *ngIf="productForm.get('price').errors">Min 1</mat-hint>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!productForm.valid" mat-dialog-close [mat-dialog-close]="productForm.value">{{data.button}}</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

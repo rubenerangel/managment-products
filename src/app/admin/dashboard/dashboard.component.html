@@ -1,0 +1,52 @@
+<div class="row mt-3">
+  <div class="col-12 text-center mt-3">
+    <h3>Maestro de Productos</h3> 
+  </div>
+  <div class="col-9 mx-auto">
+    <div class="row" div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="col-9">
+        <mat-form-field class="px-5">
+          <input type="text"  matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+      </div>
+      <div class="col-3" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button color="accent" (click)="openDialodAddProduct()">
+          <mat-icon>control_point</mat-icon> Add product
+        </button>
+      </div>
+    </div>
+  </div> 
+  <div class="col-9 mx-auto text-center" *ngIf="this.products">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="this.products" matSort>
+        <!-- Name Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element"> 
+            <a (click)="openDialodAddProduct(element)"> <mat-icon class="text-warning">edit</mat-icon> </a> &nbsp; 
+            <a (click)="deleteProduct(element.id)"><mat-icon class="text-danger">delete</mat-icon></a> 
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    
+  </div>
+
+</div>

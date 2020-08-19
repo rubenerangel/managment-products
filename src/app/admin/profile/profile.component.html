@@ -1,0 +1,25 @@
+<div class="row mt-3 p-3">
+  <div class="col-7 mx-auto px-3">
+    <mat-card class="p-3">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="p-2 text-center">
+        <div class="col-9 text-center mx-auto">
+          <h3>Profile</h3>
+        </div>
+        <div class="col-9 mx-auto mt-2">
+          <div class="form-group">
+            <h5>Select Image</h5>
+            <input type="file" name="" id="" accept=".png,.jpg" (change)="onUpload($event)">
+          </div>
+        </div>
+        <div class="col-9 mx-auto mt-2">
+          <mat-form-field appearance="outline" class="col-9 mx-auto">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput placeholder="Nombre" maxlength="50" formControlName="name" required autocomplete="off" class="mx-auto">
+            <mat-hint align="end" *ngIf="profileForm.get('name').errors">Rubén Rangel</mat-hint>
+            <mat-error align="start" *ngIf="profileForm.get('name').errors"><b>El nombre es requerido</b> is required</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

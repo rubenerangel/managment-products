@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayoutAlign="space-between center" class="header-toolbar">
+    <div fxLayout="row">
+      <a mat-button routerLink="">
+        <mat-icon>star_border</mat-icon>
+        <span class="logo">Conocimiento Corporativo</span> 
+      </a>
+      <div *ngIf="!isLogged">
+        <div *ngIf="!deviceXs">
+          <a mat-button routerLink="">Home</a>
+          <a mat-button routerLink="contact">Contact Us</a>
+          <a mat-button routerLink="about">About Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="mr-3" *ngIf="isLogged; else login">
+      <a mat-button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
+        <mat-icon class="md-48" *ngIf="!deviceXs">account_circle</mat-icon>
+      </a>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="profile">Profile</a>
+        <a mat-menu-item (click)="logOut()">Logout</a>
+      </mat-menu>
+    </div>
+    <ng-template #login>
+      <a mat-button routerLink="login">Login</a>
+    </ng-template>
+  </mat-toolbar-row>
+
+  <div *ngIf="!isLogged">
+    <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between center" >
+      <a mat-button routerLink="">Home</a>
+      <a mat-button routerLink="contact">Contact Us</a>
+      <a mat-button routerLink="about">About Us</a>
+    </mat-toolbar-row>
+  </div>
+</mat-toolbar>

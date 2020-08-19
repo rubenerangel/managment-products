@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+
+  tr {
+    th {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    td {
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+}

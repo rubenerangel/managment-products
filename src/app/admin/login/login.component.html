@@ -1,0 +1,35 @@
+<div class="row text-center mx-auto">
+  <div class="col-6 text-center mt-4 mx-auto">
+    <mat-card class="mx-12 text-center mx-auto">
+      <form class="mx-auto text-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+          <div class="col-9 text-center mx-auto">
+            <h3>Login</h3>
+          </div>
+          <div class="col-9 mx-auto">
+            <mat-form-field appearance="outline" class="col-9">
+              <mat-label>E-mail</mat-label>
+              <input type="email" matInput placeholder="cc@cc.com" maxlength="50" formControlName="email" required autocomplete="off">
+              <mat-hint align="end" *ngIf="loginForm.get('email').errors">abc@xyz.io</mat-hint>
+              <mat-error align="start" *ngIf="loginForm.get('email').errors">E-mail is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-9 mx-auto">
+            <mat-form-field appearance="outline" class="col-9">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput maxlength="50" class="mx-auto" formControlName="password" required >
+              <mat-hint align="end" *ngIf="loginForm.get('password').errors">Greater or equal 3</mat-hint>
+              <mat-error *ngIf="loginForm.get('password').errors" align="start">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-error *ngIf="errorLogin">{{errorLogin}}</mat-error>
+          </div>
+          <div class="col-9 mx-auto text-center">
+            <button mat-raised-button color="accent" class="col-3 mt-2" [disabled]="!loginForm.valid">
+              Login
+            </button>
+          </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
