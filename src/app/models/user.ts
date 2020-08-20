@@ -1,7 +1,6 @@
 export interface UserInterface {
   id ?: string;
-  name ?: string;
+  displayName ?: string;
   email ?: string;
-  password ?: string;
-  photoUrl ?: string;
+  photoURL ?: string;
 }

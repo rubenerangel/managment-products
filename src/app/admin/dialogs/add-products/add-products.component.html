@@ -21,8 +21,8 @@
         </div>
       </mat-card-content>
       <mat-card-actions align="center">
-        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!productForm.valid" mat-dialog-close [mat-dialog-close]="productForm.value">{{data.button}}</button>
+        <button mat-raised-button color="warn" mat-dialog-close tabindex="-1">Cancel</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!productForm.valid" mat-dialog-close mat-dialog-close (click)="openDialogAddProduct()">{{data.button}}</button>
       </mat-card-actions>
     </form>
   </mat-card>

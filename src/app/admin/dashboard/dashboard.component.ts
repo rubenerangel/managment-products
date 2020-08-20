@@ -38,14 +38,36 @@ export class DashboardComponent implements OnInit{
     this.getListProducts();
   }
 
-  openDialodAddProduct(product: ProductInterface = {id: null} ) { // Open Dialog to Add or Update
+  openDialodAddProduct(product: ProductInterface ) { // Open Dialog to Add or Update
+    this.debugResponses(this.dialog);
     let openAddProducts;
+    return false;
 
     /* Open Modal */
     if (product.id == null) { // Add
-      openAddProducts = this.dialog.open(AddProductsComponent, {data: {product, title: 'Add Product', button: 'Save'}});
+      openAddProducts = this.dialog.open(
+        AddProductsComponent, 
+        {
+          data: {
+            product, 
+            title: 'Add Product', 
+            button: 'Save',
+          },
+          disableClose: true
+        }
+      );
     } else { // Update
-      openAddProducts = this.dialog.open(AddProductsComponent, {data: {product, title: 'Update Product', button: 'Update'}});
+      openAddProducts = this.dialog.open(
+        AddProductsComponent, 
+        {
+          data: {
+            product, 
+            title: 'Update Product', 
+            button: 'Update',
+          },
+          disableClose: true
+        }
+      );
     }
 
     /* Closed Modal And Save or Update */

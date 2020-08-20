@@ -12,11 +12,20 @@
           <a mat-button routerLink="about">About Us</a>
         </div>
       </div>
+      <div *ngIf="isLogged">
+        <a mat-button routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="profile" routerLinkActive="active">Profile</a>
+      </div>
     </div>
-    <div class="mr-3" *ngIf="isLogged; else login">
+    <div class="mr-3" *ngIf="isLogged; else login" fxLayout="row" fxLayoutAlign="center center">
       <a mat-button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
-        <mat-icon class="md-48" *ngIf="!deviceXs">account_circle</mat-icon>
+        <div *ngIf="userImageUrl">
+          <img src="{{userImageUrl}}" alt="icon-user"  class="icon-user">
+        </div>
+        <div *ngIf="!userImageUrl">
+          <mat-icon class="md-48" *ngIf="!deviceXs">account_circle</mat-icon>
+        </div>
       </a>
       <mat-menu #menu="matMenu">
         <a mat-menu-item routerLink="profile">Profile</a>
@@ -35,4 +44,5 @@
       <a mat-button routerLink="about">About Us</a>
     </mat-toolbar-row>
   </div>
+  
 </mat-toolbar>

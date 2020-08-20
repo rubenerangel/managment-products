@@ -23,7 +23,7 @@ export class AddProductsComponent implements OnInit {
 
   ngOnInit() {
     this.productForm = new FormGroup({
-      id: new FormControl(),
+      id: new FormControl(null),
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.minLength(1)])
     });
@@ -32,4 +32,6 @@ export class AddProductsComponent implements OnInit {
   addProduct() {
     /*  */
   } 
+
+  openDialogAddProduct() {}
 }

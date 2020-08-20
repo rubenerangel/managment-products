@@ -1,24 +1,40 @@
 <div class="row mt-3 p-3">
-  <div class="col-7 mx-auto px-3">
+  <div class="col-6 mx-auto px-3">
     <mat-card class="p-3">
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="p-2 text-center">
+      <mat-card-title>
         <div class="col-9 text-center mx-auto">
           <h3>Profile</h3>
         </div>
-        <div class="col-9 mx-auto mt-2">
-          <div class="form-group">
-            <h5>Select Image</h5>
-            <input type="file" name="" id="" accept=".png,.jpg" (change)="onUpload($event)">
+      </mat-card-title>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="p-2 text-center">
+        <mat-card-content>
+          <div class="col-6 mx-auto mt-2">
+            <div class="form-group">
+              <h5>Select Image</h5>
+              <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+              <input accept=".png,.jpg" hidden #fileInput type="file" (change)="onUpload($event)">
+              
+              <mat-progress-bar mode="determinate" [value]="(uploadPercent | async)" class="mt-2"></mat-progress-bar>
+              <input #imageUser name="imageUser" hidden [value]="urlImage | async">
+            </div>
           </div>
-        </div>
-        <div class="col-9 mx-auto mt-2">
-          <mat-form-field appearance="outline" class="col-9 mx-auto">
-            <mat-label>Nombre</mat-label>
-            <input type="text" matInput placeholder="Nombre" maxlength="50" formControlName="name" required autocomplete="off" class="mx-auto">
-            <mat-hint align="end" *ngIf="profileForm.get('name').errors">Rubén Rangel</mat-hint>
-            <mat-error align="start" *ngIf="profileForm.get('name').errors"><b>El nombre es requerido</b> is required</mat-error>
-          </mat-form-field>
-        </div>
+
+          <div class="col-9 mx-auto mt-2">
+            <mat-form-field appearance="outline" class="col-9 mx-auto">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput placeholder="Name" maxlength="50" formControlName="displayName" required autocomplete="off" class="mx-auto" [(ngModel)]="user.displayName">
+
+              <mat-hint align="end" *ngIf="profileForm.get('displayName').errors">Rubén Rangel</mat-hint>
+              <mat-error align="start" *ngIf="profileForm.get('displayName').errors"><b>El nombre</b> es requerido</mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="messageSucces" class="alert alert-success" role="alert">
+            {{messageSucces}}
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="center">
+          <button mat-raised-button color="accent" [disabled]="!profileForm.valid"><mat-icon>save</mat-icon> Save</button>
+        </mat-card-actions>
       </form>
     </mat-card>
   </div>
