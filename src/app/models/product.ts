@@ -2,11 +2,11 @@ export interface ProductInterface {
   id ?: string;
   name ?: string;
   price ?: string;
-  /* features ?: string;
+  features ?: string;
   relaseDate ?: Date;
+  country?: string;
   mailManufacturer ?: string;
-  country: string;
-  availabeUnits ?: number;
+  /*availabeUnits ?: number;
   soldUnits ?: number;
   urlProductImage : string; */
 };

@@ -10,6 +10,7 @@
             <mat-label>Name</mat-label>
             <input matInput type="text" placeholder="Name"  id="name" [(ngModel)]="data.product.name" formControlName="name">
             <mat-hint align="end" *ngIf="productForm.get('name').errors">Min. 3 Characters</mat-hint>
+            <mat-error *ngIf="productForm.get('name').errors">Name is required</mat-error>
           </mat-form-field>
         </div>
 
@@ -24,14 +25,15 @@
         <div class="col-12">
           <mat-form-field class="example-full-width">
             <mat-label>Characteristics</mat-label>
-            <textarea matInput placeholder="Characteristics"></textarea>
+            <textarea matInput placeholder="Characteristics" formControlName="features" [(ngModel)]="data.features"></textarea>
+            <mat-hint align="end" *ngIf="productForm.get('price').errors">Min 10</mat-hint>
           </mat-form-field>
         </div>
 
         <div class="col-12">
           <mat-form-field>
             <mat-label>Release Date</mat-label>
-            <input matInput [matDatepicker]="picker1" >
+            <input matInput [matDatepicker]="picker1" formControlName="relaseDate" [(ngModel)]="data.relaseDate">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
@@ -40,7 +42,7 @@
         <div class="col-12">
           <mat-form-field appearance="fill">
             <mat-label>mail manufacturer</mat-label>
-            <input matInput placeholder="pat@example.com"  required>
+            <input matInput placeholder="pat@example.com"  required formControlName="mailManufacturer"type="email">
             <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
           </mat-form-field>
         </div>
@@ -48,11 +50,10 @@
         <div class="col-12">
           <mat-form-field appearance="fill">
             <mat-label>Country Manufacture</mat-label>
-            <mat-select>
+            <mat-select formControlName="country" [(ngModel)]="data.country">
               <mat-option value="option">Option</mat-option>
               <mat-option *ngFor="let country of countries" value={{country.name}}>{{country.name}}</mat-option>
             </mat-select>
-            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
           </mat-form-field>
         </div>
       </mat-card-content>

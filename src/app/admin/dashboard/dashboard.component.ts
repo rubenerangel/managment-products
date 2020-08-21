@@ -26,7 +26,7 @@ import {
 export class DashboardComponent implements OnInit{
   productForm: FormGroup;
   public products: MatTableDataSource<ProductInterface>;
-  displayedColumns: string[] = ['id','name', 'price'];
+  displayedColumns: string[] = ['id','name', 'price', 'features'];
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;

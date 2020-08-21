@@ -35,7 +35,12 @@ export class AddProductsComponent implements OnInit {
     this.productForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      price: new FormControl('', [Validators.required, Validators.minLength(1)])
+      price: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      features: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      relaseDate: new FormControl(new Date(), [Validators.required, Validators.minLength(10)]),
+      mailManufacturer: new FormControl('', [Validators.required, 
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      country: new FormControl('', [Validators.required]),
     });
 
     this._http.get('https://restcountries.eu/rest/v2/all?fields=name')
