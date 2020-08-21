@@ -33,6 +33,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { CdkColumnDef } from '@angular/cdk/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { CdkColumnDef } from '@angular/cdk/table';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    HttpClientModule
   ],
   providers: [AngularFirestore, CdkColumnDef],
   bootstrap: [AppComponent]

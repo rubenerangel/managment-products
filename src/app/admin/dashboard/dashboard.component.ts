@@ -14,7 +14,9 @@ import { ConfirmDeleteComponent } from '../dialogs/confirm-delete/confirm-delete
 import { AddProductsComponent } from '../dialogs/add-products/add-products.component';
 import {
   FormGroup,
+  NgForm
 } from '@angular/forms';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -31,17 +33,16 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private productDataAPI: ProductApiService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.getListProducts();
+    
   }
 
-  openDialodAddProduct(product: ProductInterface ) { // Open Dialog to Add or Update
-    this.debugResponses(this.dialog);
+  openDialodAddProduct(product: ProductInterface = {id: null} ) { 
     let openAddProducts;
-    return false;
 
     /* Open Modal */
     if (product.id == null) { // Add
@@ -72,7 +73,10 @@ export class DashboardComponent implements OnInit{
 
     /* Closed Modal And Save or Update */
     openAddProducts.afterClosed().subscribe(result => {
-      if (result.id === null) {
+      if (result == '')
+        return false;
+
+      if (result.id == null) {
         this.productDataAPI.addProduct(result).then(resp => {
         })
         .catch(error => {
@@ -103,7 +107,7 @@ export class DashboardComponent implements OnInit{
   }
 
   addProduct(): void {
-    console.log(this.productForm.value);
+    // console.log(this.productForm.value);
   }
 
   editProduct(idProduct: string) {
@@ -119,7 +123,7 @@ export class DashboardComponent implements OnInit{
       data: {
         title: 'Delete Record',
         buttonText: {
-          ok: 'Save',
+          ok: 'Delete',
           cancel: 'No'
         }
       }

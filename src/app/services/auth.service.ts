@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private afAuth: AngularFireAuth) { }
 
   isAuth() {

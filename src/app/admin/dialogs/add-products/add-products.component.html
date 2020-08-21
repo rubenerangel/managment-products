@@ -3,7 +3,7 @@
     <mat-card-title>{{data.title}}</mat-card-title>
     <form [formGroup]="productForm" autocomplete="off" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
-        <div class="col-9">
+        <div class="col-12">
             <input type="hidden" id="id" [(ngModel)]="data.product.id" formControlName="id" *ngIf="data.product.id != null">
      
           <mat-form-field>
@@ -12,17 +12,53 @@
             <mat-hint align="end" *ngIf="productForm.get('name').errors">Min. 3 Characters</mat-hint>
           </mat-form-field>
         </div>
-        <div class="col-9">
-          <mat-form-field>
+
+        <div class="col-12">
+          <mat-form-field fxFlex="300px">
             <mat-label>Price</mat-label>
             <input type="number" name="price" id="price"  matInput [(ngModel)]="data.product.price" formControlName="price">
             <mat-hint align="end" *ngIf="productForm.get('price').errors">Min 1</mat-hint>
           </mat-form-field>
         </div>
+
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Characteristics</mat-label>
+            <textarea matInput placeholder="Characteristics"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field>
+            <mat-label>Release Date</mat-label>
+            <input matInput [matDatepicker]="picker1" >
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field appearance="fill">
+            <mat-label>mail manufacturer</mat-label>
+            <input matInput placeholder="pat@example.com"  required>
+            <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+          </mat-form-field>
+        </div>
+        
+        <div class="col-12">
+          <mat-form-field appearance="fill">
+            <mat-label>Country Manufacture</mat-label>
+            <mat-select>
+              <mat-option value="option">Option</mat-option>
+              <mat-option *ngFor="let country of countries" value={{country.name}}>{{country.name}}</mat-option>
+            </mat-select>
+            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+          </mat-form-field>
+        </div>
       </mat-card-content>
       <mat-card-actions align="center">
         <button mat-raised-button color="warn" mat-dialog-close tabindex="-1">Cancel</button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!productForm.valid" mat-dialog-close mat-dialog-close (click)="openDialogAddProduct()">{{data.button}}</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!productForm.valid" mat-dialog-close [mat-dialog-close]="productForm.value" >{{data.button}}</button>
       </mat-card-actions>
     </form>
   </mat-card>

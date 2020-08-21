@@ -5,6 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { HeaderComponent } from '../../header/header.component';
 import { AuthService } from '../../services/auth.service';
 import { UserInterface } from '../../models/user';
 import { finalize } from 'rxjs/operators';
@@ -25,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private storage: AngularFireStorage, 
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   user: UserInterface = {
@@ -57,15 +58,16 @@ export class ProfileComponent implements OnInit {
           photoURL: this.inputImageUser.nativeElement.value
         })
         .then(resp => {
+          console.log(resp)
+
           this.messageSucces = 'Successfully Updated Profile';
-          console.log(resp);
         })
         .catch(error => {
           console.log(error.message)
         });
       }
     });
-    console.log(this.inputImageUser.nativeElement.value);
+    this.profileForm.reset();
   }
 
   onUpload(e) {

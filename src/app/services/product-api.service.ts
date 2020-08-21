@@ -8,6 +8,7 @@ import { ProductInterface } from '../models/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +54,10 @@ export class ProductApiService {
     }));
   }
 
+  getAllCountriesAPI() {
+
+  }
+ 
   updateProduct(product: ProductInterface) {
     let idProduct = product.id;
     this.productDoc = this.afs.doc<ProductInterface>(`products/${idProduct}`);

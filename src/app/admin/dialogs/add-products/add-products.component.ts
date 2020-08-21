@@ -1,13 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from  '@angular/material/dialog';
+import { ProductApiService } from 'src/app/services/product-api.service';
 import {
   FormGroup,
   FormControl,
-  Validators
+  Validators,
+  NgForm
 } from '@angular/forms';
 import {
-  MatDialog
+  MatDialog, 
+  MatDialogRef,
+  MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http'; 
 
 @Component({
   selector: 'app-add-products',
@@ -16,10 +20,16 @@ import {
 })
 export class AddProductsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog: MatDialog,
+    public productDataAPI: ProductApiService,
+    private _http: HttpClient
+  ) { }
   productForm: FormGroup;
   dialogAddProduct: MatDialog;
   public editForm: String;
+  public countries;
 
   ngOnInit() {
     this.productForm = new FormGroup({
@@ -27,11 +37,13 @@ export class AddProductsComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.minLength(1)])
     });
+
+    this._http.get('https://restcountries.eu/rest/v2/all?fields=name')
+    .subscribe(resp => {
+        console.log(resp);
+        this.countries = resp;
+    });
   }
 
-  addProduct() {
-    /*  */
-  } 
-
-  openDialogAddProduct() {}
+  
 }
